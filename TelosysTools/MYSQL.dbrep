@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Telosys Database Repository --><root>
+<tableList databaseId="0" databaseName="MYSQL" databaseProductName="MySQL" generation="2018-09-27 11:31:25">
+<table catalog="invoicespaymanents" databaseType="TABLE" javaBean="Accounts" name="accounts" schema="">
+<column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="account_id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INT" inputType="number" javaName="accountId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Account id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="customer_id" dbNotNull="true" dbPosition="2" dbSize="10" dbTypeName="INT" inputType="number" javaName="customerId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Customer id" notNull="true" selected="true"/>
+<fk name="fk_accounts_customers1">
+<fkcol colname="customer_id" colref="customer_id" deferrable="7" deleterule="3" sequence="1" tablename="accounts" tableref="customers" updaterule="3"/>
+</fk>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="fk_financial_transactions_accounts1" id="LINK_FK_fk_financial_transactions_accounts1_I" inverseSideOf="LINK_FK_fk_financial_transactions_accounts1_O" javaName="listOfFinancialTransactions" javaType="java.util.List" joinTableName="" mappedBy="accounts" optional="" owningSide="false" sourceTableName="accounts" targetEntity="FinancialTransactions" targetTableName="financial_transactions" used="true"/>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="fk_accounts_customers1" id="LINK_FK_fk_accounts_customers1_O" inverseSideOf="" javaName="customers" javaType="Customers" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="accounts" targetEntity="Customers" targetTableName="customers" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="customer_id" nullable="true" referencedColumnName="customer_id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+</table>
+<table catalog="invoicespaymanents" databaseType="TABLE" javaBean="Customers" name="customers" schema="">
+<column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="customer_id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INT" inputType="number" javaName="customerId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Customer id" notNull="true" selected="true"/>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="fk_orders_customers1" id="LINK_FK_fk_orders_customers1_I" inverseSideOf="LINK_FK_fk_orders_customers1_O" javaName="listOfOrders" javaType="java.util.List" joinTableName="" mappedBy="customers" optional="" owningSide="false" sourceTableName="customers" targetEntity="Orders" targetTableName="orders" used="true"/>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="fk_accounts_customers1" id="LINK_FK_fk_accounts_customers1_I" inverseSideOf="LINK_FK_fk_accounts_customers1_O" javaName="listOfAccounts" javaType="java.util.List" joinTableName="" mappedBy="customers" optional="" owningSide="false" sourceTableName="customers" targetEntity="Accounts" targetTableName="accounts" used="true"/>
+</table>
+<table catalog="invoicespaymanents" databaseType="TABLE" javaBean="FinancialTransactions" name="financial_transactions" schema="">
+<column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="transaction_id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INT" inputType="number" javaName="transactionId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Transaction id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="account_id" dbNotNull="true" dbPosition="2" dbSize="10" dbTypeName="INT" inputType="number" javaName="accountId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Account id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="invoice_number" dbNotNull="true" dbPosition="3" dbSize="10" dbTypeName="INT" inputType="number" javaName="invoiceNumber" javaType="java.lang.Integer" jdbcTypeCode="4" label="Invoice number" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="transaction_type_code" dbNotNull="true" dbPosition="4" dbSize="10" dbTypeName="INT" inputType="number" javaName="transactionTypeCode" javaType="java.lang.Integer" jdbcTypeCode="4" label="Transaction type code" notNull="true" selected="true"/>
+<fk name="fk_financial_transactions_accounts1">
+<fkcol colname="account_id" colref="account_id" deferrable="7" deleterule="3" sequence="1" tablename="financial_transactions" tableref="accounts" updaterule="3"/>
+</fk>
+<fk name="fk_financial_transactions_invoices1">
+<fkcol colname="invoice_number" colref="invoice_number" deferrable="7" deleterule="3" sequence="1" tablename="financial_transactions" tableref="invoices" updaterule="3"/>
+</fk>
+<fk name="fk_financial_transactions_transaction_types1">
+<fkcol colname="transaction_type_code" colref="transaction_type_code" deferrable="7" deleterule="3" sequence="1" tablename="financial_transactions" tableref="transaction_types" updaterule="3"/>
+</fk>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="fk_financial_transactions_transaction_types1" id="LINK_FK_fk_financial_transactions_transaction_types1_O" inverseSideOf="" javaName="transactionTypes" javaType="TransactionTypes" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="financial_transactions" targetEntity="TransactionTypes" targetTableName="transaction_types" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="transaction_type_code" nullable="true" referencedColumnName="transaction_type_code" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="fk_financial_transactions_invoices1" id="LINK_FK_fk_financial_transactions_invoices1_O" inverseSideOf="" javaName="invoices" javaType="Invoices" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="financial_transactions" targetEntity="Invoices" targetTableName="invoices" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="invoice_number" nullable="true" referencedColumnName="invoice_number" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="fk_financial_transactions_accounts1" id="LINK_FK_fk_financial_transactions_accounts1_O" inverseSideOf="" javaName="accounts" javaType="Accounts" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="financial_transactions" targetEntity="Accounts" targetTableName="accounts" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="account_id" nullable="true" referencedColumnName="account_id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+</table>
+<table catalog="invoicespaymanents" databaseType="TABLE" javaBean="InvoiceLineItems" name="invoice_line_items" schema="">
+<column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="order_item_id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INT" inputType="number" javaName="orderItemId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Order item id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="extra_type_code" dbNotNull="true" dbPosition="2" dbSize="10" dbTypeName="INT" inputType="number" javaName="extraTypeCode" javaType="java.lang.Integer" jdbcTypeCode="4" label="Extra type code" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="invoice_number" dbNotNull="true" dbPosition="3" dbSize="10" dbTypeName="INT" inputType="number" javaName="invoiceNumber" javaType="java.lang.Integer" jdbcTypeCode="4" label="Invoice number" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="reg_number" dbNotNull="true" dbPosition="4" dbSize="10" dbTypeName="INT" inputType="number" javaName="regNumber" javaType="java.lang.Integer" jdbcTypeCode="4" label="Reg number" notNull="true" selected="true"/>
+<fk name="fk_invoice_line_items_invoices1">
+<fkcol colname="invoice_number" colref="invoice_number" deferrable="7" deleterule="3" sequence="1" tablename="invoice_line_items" tableref="invoices" updaterule="3"/>
+</fk>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="fk_invoice_line_items_invoices1" id="LINK_FK_fk_invoice_line_items_invoices1_O" inverseSideOf="" javaName="invoices" javaType="Invoices" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="invoice_line_items" targetEntity="Invoices" targetTableName="invoices" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="invoice_number" nullable="true" referencedColumnName="invoice_number" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="fk_order_items_invoice_line_items1" id="LINK_FK_fk_order_items_invoice_line_items1_I" inverseSideOf="LINK_FK_fk_order_items_invoice_line_items1_O" javaName="listOfOrderItems" javaType="java.util.List" joinTableName="" mappedBy="invoiceLineItems" optional="" owningSide="false" sourceTableName="invoice_line_items" targetEntity="OrderItems" targetTableName="order_items" used="true"/>
+</table>
+<table catalog="invoicespaymanents" databaseType="TABLE" javaBean="Invoices" name="invoices" schema="">
+<column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="invoice_number" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INT" inputType="number" javaName="invoiceNumber" javaType="java.lang.Integer" jdbcTypeCode="4" label="Invoice number" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="booking_id" dbNotNull="true" dbPosition="2" dbSize="10" dbTypeName="INT" inputType="number" javaName="bookingId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Booking id" notNull="true" selected="true"/>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="fk_invoice_line_items_invoices1" id="LINK_FK_fk_invoice_line_items_invoices1_I" inverseSideOf="LINK_FK_fk_invoice_line_items_invoices1_O" javaName="listOfInvoiceLineItems" javaType="java.util.List" joinTableName="" mappedBy="invoices" optional="" owningSide="false" sourceTableName="invoices" targetEntity="InvoiceLineItems" targetTableName="invoice_line_items" used="true"/>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="fk_financial_transactions_invoices1" id="LINK_FK_fk_financial_transactions_invoices1_I" inverseSideOf="LINK_FK_fk_financial_transactions_invoices1_O" javaName="listOfFinancialTransactions" javaType="java.util.List" joinTableName="" mappedBy="invoices" optional="" owningSide="false" sourceTableName="invoices" targetEntity="FinancialTransactions" targetTableName="financial_transactions" used="true"/>
+</table>
+<table catalog="invoicespaymanents" databaseType="TABLE" javaBean="OrderItems" name="order_items" schema="">
+<column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="order_item_id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INT" inputType="number" javaName="orderItemId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Order item id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="order_id" dbNotNull="true" dbPosition="2" dbSize="10" dbTypeName="INT" inputType="number" javaName="orderId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Order id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="product_id" dbNotNull="true" dbPosition="3" dbSize="10" dbTypeName="INT" inputType="number" javaName="productId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Product id" notNull="true" selected="true"/>
+<fk name="fk_order_items_invoice_line_items1">
+<fkcol colname="order_item_id" colref="order_item_id" deferrable="7" deleterule="3" sequence="1" tablename="order_items" tableref="invoice_line_items" updaterule="3"/>
+</fk>
+<fk name="fk_order_items_orders1">
+<fkcol colname="order_id" colref="order_id" deferrable="7" deleterule="3" sequence="1" tablename="order_items" tableref="orders" updaterule="3"/>
+</fk>
+<fk name="fk_order_items_products1">
+<fkcol colname="product_id" colref="product_id" deferrable="7" deleterule="3" sequence="1" tablename="order_items" tableref="products" updaterule="3"/>
+</fk>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="fk_order_items_invoice_line_items1" id="LINK_FK_fk_order_items_invoice_line_items1_O" inverseSideOf="" javaName="invoiceLineItems" javaType="InvoiceLineItems" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="order_items" targetEntity="InvoiceLineItems" targetTableName="invoice_line_items" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="order_item_id" nullable="true" referencedColumnName="order_item_id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="fk_order_items_orders1" id="LINK_FK_fk_order_items_orders1_O" inverseSideOf="" javaName="orders" javaType="Orders" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="order_items" targetEntity="Orders" targetTableName="orders" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="order_id" nullable="true" referencedColumnName="order_id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="fk_order_items_products1" id="LINK_FK_fk_order_items_products1_O" inverseSideOf="" javaName="products" javaType="Products" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="order_items" targetEntity="Products" targetTableName="products" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="product_id" nullable="true" referencedColumnName="product_id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+</table>
+<table catalog="invoicespaymanents" databaseType="TABLE" javaBean="Orders" name="orders" schema="">
+<column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="order_id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INT" inputType="number" javaName="orderId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Order id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="customer_id" dbNotNull="true" dbPosition="2" dbSize="10" dbTypeName="INT" inputType="number" javaName="customerId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Customer id" notNull="true" selected="true"/>
+<fk name="fk_orders_customers1">
+<fkcol colname="customer_id" colref="customer_id" deferrable="7" deleterule="3" sequence="1" tablename="orders" tableref="customers" updaterule="3"/>
+</fk>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="fk_order_items_orders1" id="LINK_FK_fk_order_items_orders1_I" inverseSideOf="LINK_FK_fk_order_items_orders1_O" javaName="listOfOrderItems" javaType="java.util.List" joinTableName="" mappedBy="orders" optional="" owningSide="false" sourceTableName="orders" targetEntity="OrderItems" targetTableName="order_items" used="true"/>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="fk_orders_customers1" id="LINK_FK_fk_orders_customers1_O" inverseSideOf="" javaName="customers" javaType="Customers" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="orders" targetEntity="Customers" targetTableName="customers" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="customer_id" nullable="true" referencedColumnName="customer_id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+</table>
+<table catalog="invoicespaymanents" databaseType="TABLE" javaBean="Products" name="products" schema="">
+<column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="product_id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INT" inputType="number" javaName="productId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Product id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="products_product_id" dbNotNull="true" dbPosition="2" dbSize="10" dbTypeName="INT" inputType="number" javaName="productsProductId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Products product id" notNull="true" selected="true"/>
+<fk name="fk_products_products1">
+<fkcol colname="products_product_id" colref="product_id" deferrable="7" deleterule="3" sequence="1" tablename="products" tableref="products" updaterule="3"/>
+</fk>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="fk_order_items_products1" id="LINK_FK_fk_order_items_products1_I" inverseSideOf="LINK_FK_fk_order_items_products1_O" javaName="listOfOrderItems" javaType="java.util.List" joinTableName="" mappedBy="products" optional="" owningSide="false" sourceTableName="products" targetEntity="OrderItems" targetTableName="order_items" used="true"/>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="fk_products_products1" id="LINK_FK_fk_products_products1_I" inverseSideOf="LINK_FK_fk_products_products1_O" javaName="listOfProducts" javaType="java.util.List" joinTableName="" mappedBy="products" optional="" owningSide="false" sourceTableName="products" targetEntity="Products" targetTableName="products" used="true"/>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="fk_products_products1" id="LINK_FK_fk_products_products1_O" inverseSideOf="" javaName="products" javaType="Products" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="products" targetEntity="Products" targetTableName="products" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="products_product_id" nullable="true" referencedColumnName="product_id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+</table>
+<table catalog="invoicespaymanents" databaseType="TABLE" javaBean="TransactionTypes" name="transaction_types" schema="">
+<column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="transaction_type_code" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INT" inputType="number" javaName="transactionTypeCode" javaType="java.lang.Integer" jdbcTypeCode="4" label="Transaction type code" notNull="true" selected="true"/>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="fk_financial_transactions_transaction_types1" id="LINK_FK_fk_financial_transactions_transaction_types1_I" inverseSideOf="LINK_FK_fk_financial_transactions_transaction_types1_O" javaName="listOfFinancialTransactions" javaType="java.util.List" joinTableName="" mappedBy="transactionTypes" optional="" owningSide="false" sourceTableName="transaction_types" targetEntity="FinancialTransactions" targetTableName="financial_transactions" used="true"/>
+</table>
+</tableList>
+</root>
