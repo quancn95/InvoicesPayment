@@ -4,8 +4,9 @@
 */
 package org.fre18.qnt.service;
 
-import org.fre18.qnt.entity.Products;
 import java.util.List;
+
+import org.fre18.qnt.entity.Products;
 
 public interface ProductsService {
 

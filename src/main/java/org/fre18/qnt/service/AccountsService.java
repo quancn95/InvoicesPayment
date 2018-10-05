@@ -4,8 +4,9 @@
 */
 package org.fre18.qnt.service;
 
-import org.fre18.qnt.entity.Accounts;
 import java.util.List;
+
+import org.fre18.qnt.entity.Accounts;
 
 public interface AccountsService {
 
@@ -17,7 +18,7 @@ public interface AccountsService {
 
 	public Accounts create(Accounts accounts);
 
-	public Accounts update(Accounts accounts);
+	//public Accounts update(Accounts accounts);
 
 	public Boolean exist(Accounts accounts);
 }

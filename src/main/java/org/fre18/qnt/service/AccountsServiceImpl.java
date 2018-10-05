@@ -40,7 +40,7 @@ public class AccountsServiceImpl implements AccountsService {
 		return accountsRepository.save(accounts);
 	}
 
-	@Override
+	/*@Override
 	public Accounts update(Accounts accountsToUpdate) {
 						Accounts accounts = accountsRepository.getOne(accountsToUpdate.getAccountId());
 										
@@ -48,7 +48,7 @@ public class AccountsServiceImpl implements AccountsService {
 			
 		}
 				return accountsRepository.save(accounts);
-	}
+	}*/
 
 	@Override
 	public Boolean exist(Accounts accounts) {

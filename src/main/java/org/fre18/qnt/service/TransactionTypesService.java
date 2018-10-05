@@ -4,8 +4,9 @@
 */
 package org.fre18.qnt.service;
 
-import org.fre18.qnt.entity.TransactionTypes;
 import java.util.List;
+
+import org.fre18.qnt.entity.TransactionTypes;
 
 public interface TransactionTypesService {
 
